@@ -54,7 +54,7 @@ pub async fn requeued_packages_are_due_instantly(isolated_server: IsolatedServer
 
 #[rstest]
 #[tokio::test]
-pub async fn requeued_packages_are_queued_with_default_priority(isolated_server: IsolatedServer) {
+pub async fn requeued_packages_are_queued_with_manual_priority(isolated_server: IsolatedServer) {
     let client = isolated_server.client;
 
     setup_single_rebuild_request(&client).await;
@@ -67,7 +67,7 @@ pub async fn requeued_packages_are_queued_with_default_priority(isolated_server:
         .pop()
         .unwrap();
 
-    assert_eq!(Priority::default(), job.priority)
+    assert_eq!(Priority::manual(), job.priority)
 }
 
 #[rstest]
